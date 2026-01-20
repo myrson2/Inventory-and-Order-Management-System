@@ -1,3 +1,45 @@
+# SmartStock  
+## Inventory & Order Management System (Java OOP)
+
+---
+
+## 📌 Project Overview
+SmartStock is a **console-based Java application** built for small retail businesses.
+It manages **products, users, and customer orders** using **Object-Oriented Programming (OOP)** concepts.
+
+This project is designed to demonstrate **clean architecture**, **real-world system design**, and **scalable OOP practices**.
+
+---
+
+## 🎯 Project Objectives
+- Apply core Java OOP principles in a real-world scenario
+- Design a clean and readable package structure
+- Practice business logic and validation rules
+- Build a portfolio-ready Java system
+
+---
+
+## 📂 Project Structure
+
+~~~
+smartstock/
+│
+├── product/
+│   ├── Product.java
+│   ├── PerishableProduct.java
+│   ├── NonPerishableProduct.java
+│
+├── user/
+│   ├── User.java
+│   ├── Admin.java
+│   ├── Customer.java
+│
+├── order/
+│   ├── Order.java
+│   ├── OrderItem.java
+│
+└── Main.java
+~~~
 
 ---
 

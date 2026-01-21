@@ -64,18 +64,24 @@ public class App {
             int userRoleChoice = scanner.nextInt();
             scanner.nextLine();
 
-            switch (userRoleChoice) {
-                case 1: // Customer Dashboard
-                    
-                    break;
-            
-                case 2: // Admin Dashboard
-                    
-                    break;
-                    
-                default:
-                    break;
-            }
+            System.out.println("====================");
+
+            do{ // As long as userRoleChoice Invalid 
+                switch (userRoleChoice) {
+                    case 1: // Customer Dashboard
+                        
+                        break;
+                
+                    case 2: // Admin Dashboard
+                        System.out.println("===== Welcome to Admin Dashboard =====");
+                        adminDashboardMenu();
+                        break;
+
+                    default:
+                        System.out.println("Invalid Code.");
+                        break;
+                }
+            }while(userRoleChoice > 3); //valid userRoleChoice
         
         } while(userAuthChoice != 2); // end user authentication
 
@@ -90,5 +96,11 @@ public class App {
     static void userRole(){
         System.out.println("1. Customer");
         System.out.println("2. Admin");
+    }
+
+    static void adminDashboardMenu(){
+        System.out.println("1. Add Product");
+        System.out.println("2. Update Stock");
+        System.out.println("3. View All Orders");
     }
 }

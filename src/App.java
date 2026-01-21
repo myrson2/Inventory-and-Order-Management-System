@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import user.User;
+import user.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -16,8 +16,6 @@ public class App {
 
             System.out.println("====================");
 
-            User user = new User();
-
             do{ // As long as invalid 
                 switch(userAuthChoice){
                     case 1:
@@ -32,19 +30,52 @@ public class App {
                         System.out.print("Email: ");
                         String email = scanner.nextLine();
 
-                        if(user.login()){
-                            System.out.println("Successfully login.");
-                        }
+                            System.out.println("====================");
 
-                        user = new User(id, name, email);
+                            System.out.println("Hi " + name + "! Select Your Role: ");
+                            
+                            userRole();
+                            System.out.print("> ");
+                            int userRoleChoice = scanner.nextInt();
+                            scanner.nextLine();
+
+                             do{ // As long as userRoleChoice Invalid 
+                                switch (userRoleChoice) {
+                                    case 1: // Customer Dashboard
+                                        User customer = new Customer(id, name, email);
+                                            if(customer.login()) {
+                                                System.out.println("Successfully Login");
+                                            }
+
+                                            System.out.println("====================");
+
+                                        break;
+                                
+                                    case 2: // Admin Dashboard
+                                        User admin = new Admin(id, name, email);
+                                            if(admin.login()) {
+                                                System.out.println("Successfully Login");
+                                            }
+
+                                            System.out.println("====================");
+
+                                            System.out.println("Hi, " + admin.getName() + "! Welcome to Admin Dashboard.");
+                                            
+                                        break;
+
+                                    default:
+                                        System.out.println("Invalid Code.");
+                                        break;
+                                }
+                            }while(userRoleChoice > 3); //valid userRoleChoice
+
+                            System.out.println("====================");
 
                     break;
 
                     case 2:
-                        if(user.logout()){
                             System.out.println("Logging Out");
                             scanner.close();
-                        }
                     break;
 
                     default:
@@ -53,35 +84,6 @@ public class App {
                 }
 
             }while(userAuthChoice > 3); // Valid Authentication
-
-            System.out.println("====================");
-
-            //Performing Role Action
-            System.out.println("Hi " + user.getName() + "! Select Your Role: ");
-            
-            userRole();
-            System.out.println("> ");
-            int userRoleChoice = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.println("====================");
-
-            do{ // As long as userRoleChoice Invalid 
-                switch (userRoleChoice) {
-                    case 1: // Customer Dashboard
-                        
-                        break;
-                
-                    case 2: // Admin Dashboard
-                        System.out.println("===== Welcome to Admin Dashboard =====");
-                        adminDashboardMenu();
-                        break;
-
-                    default:
-                        System.out.println("Invalid Code.");
-                        break;
-                }
-            }while(userRoleChoice > 3); //valid userRoleChoice
         
         } while(userAuthChoice != 2); // end user authentication
 

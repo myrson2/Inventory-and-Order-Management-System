@@ -34,9 +34,5 @@ public abstract class User {
         return true;
     }
 
-    public boolean logout(){
-        return true;
-    }
-
-    public abstract boolean performRoleAction();
+    //public abstract boolean performRoleAction();
 }

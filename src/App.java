@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import user.*;
+import product.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -86,6 +87,25 @@ public class App {
                                                         System.out.print("Quantity: ");
                                                         int productQuantity = scanner.nextInt();
                                                         scanner.nextLine();
+
+                                                        System.out.println("\n 1. Perishable || 2. Non-perishable");
+                                                        int productType = scanner.nextInt();
+                                                        scanner.nextLine();
+
+                                                        Product product = null;
+                                                        switch (productType) {
+                                                            case 1:
+                                                                product = new NonPerishableProduct(productName, productPrice, productQuantity);   
+                                                            break;
+
+                                                            case 2:
+                                                                product = new PerishableProduct(productName, productPrice, productQuantity);   
+                                                            break;
+                                                        
+                                                            default:
+                                                                System.out.println("Invalid");
+                                                                break;
+                                                        }
                                                     break;
 
                                                     case 2:

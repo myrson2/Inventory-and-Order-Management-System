@@ -8,11 +8,20 @@ public class Product {
     private int quantity;
 
     public Product(String name, double price, int quantity){
-        this("", name, price, quantity);
+        this.id = productIdGenerator(new Random());
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public Product(String id, String name, double price, int quantity){
-        this.id = productIdGenerator(new Random());
+        
+        if(id == null || id.isEmpty()){
+            this.id = productIdGenerator(new Random()); // generate new ID if none provided
+        } else {
+            this.id = id; // use the provided ID
+        }
+
         this.name = name;
         this.price = price;
         this.quantity = quantity;

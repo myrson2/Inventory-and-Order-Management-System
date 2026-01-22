@@ -1,5 +1,9 @@
 package user;
 
+import java.util.ArrayList;
+
+import product.Product;
+
 public class Admin extends User{
     public Admin(String id, String name, String email){
         super(id, name, email);
@@ -8,6 +12,9 @@ public class Admin extends User{
     @Override
     public void performRoleAction() {
         System.out.println("Admin is managing products and inventory.");
+    }
+
+    public void addProduct(Product product){
         
     }
 }

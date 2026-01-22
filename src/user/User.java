@@ -34,5 +34,5 @@ public abstract class User {
         return true;
     }
 
-    //public abstract boolean performRoleAction();
+    public abstract void performRoleAction();
 }

@@ -48,6 +48,8 @@ public class App {
                                             }
 
                                             System.out.println("====================");
+                                            System.out.println("Hi, " + customer.getName() + "! Welcome to Customer Dashboard.");
+                                            customer.performRoleAction();
 
                                         break;
                                 
@@ -60,6 +62,42 @@ public class App {
                                             System.out.println("====================");
 
                                             System.out.println("Hi, " + admin.getName() + "! Welcome to Admin Dashboard.");
+                                            admin.performRoleAction();
+
+                                            int adminChoice = 0;
+
+                                            do{ // Admin Menu
+                                                adminDashboardMenu();
+                                                System.out.print("> ");
+                                                adminChoice = scanner.nextInt();
+                                                scanner.nextLine();
+
+                                                switch(adminChoice){
+                                                    case 1: // Add product
+                                                        System.out.println("===== Add Product =====\n");
+                                                        
+                                                        System.out.print("Name: ");
+                                                        String productName = scanner.nextLine();
+
+                                                        System.out.print("Price: ");
+                                                        double productPrice = scanner.nextDouble();
+                                                        scanner.nextLine();
+
+                                                        System.out.print("Quantity: ");
+                                                        int productQuantity = scanner.nextInt();
+                                                        scanner.nextLine();
+                                                    break;
+
+                                                    case 2:
+                                                    break;
+
+                                                    case 3:
+                                                    break;
+
+                                                    default:
+                                                    break;
+                                                } // end switch
+                                            }while(adminChoice != 0); // end admin menu
                                             
                                         break;
 

@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import user.*;
 import product.*;
 
@@ -55,7 +58,7 @@ public class App {
                                         break;
                                 
                                     case 2: // Admin Dashboard
-                                        User admin = new Admin(id, name, email);
+                                        Admin admin = new Admin(id, name, email); // Changed User to Admin
                                             if(admin.login()) {
                                                 System.out.println("Successfully Login");
                                             }
@@ -88,30 +91,44 @@ public class App {
                                                         int productQuantity = scanner.nextInt();
                                                         scanner.nextLine();
 
-                                                        System.out.println("\n 1. Perishable || 2. Non-perishable");
+                                                        System.out.println("\n 1. Non-Perishable || 2. Perishable");
                                                         int productType = scanner.nextInt();
                                                         scanner.nextLine();
 
                                                         Product product = null;
-                                                        switch (productType) {
+
+                                                        switch (productType) { // Validation of Product Type
                                                             case 1:
-                                                                product = new NonPerishableProduct(productName, productPrice, productQuantity);   
+                                                                System.out.println("Warannty (Months): ");
+                                                                int months = scanner.nextInt();
+                                                                scanner.nextLine();
+                                                                
+                                                                product = new NonPerishableProduct(productName, productPrice, productQuantity, months);   
+                                                                admin.addProduct(product);
                                                             break;
 
                                                             case 2:
-                                                                product = new PerishableProduct(productName, productPrice, productQuantity);   
+                                                                System.out.print("Enter expiration date (YYYY-MM-DD): ");
+                                                                String dateInput = scanner.nextLine();
+                                                                LocalDate expirationDate = LocalDate.parse(dateInput);
+
+                                                                product = new PerishableProduct(productName, productPrice, productQuantity, expirationDate);   
+                                                                admin.addProduct(product);
                                                             break;
                                                         
                                                             default:
                                                                 System.out.println("Invalid");
                                                                 break;
-                                                        }
+                                                        } // end of Vavlidation of Product Type
+
                                                     break;
 
                                                     case 2:
                                                     break;
 
-                                                    case 3:
+                                                    case 3: // View Product
+                                                        System.out.println("===== Viewing Products =====");
+                                                        admin.viewProducts();
                                                     break;
 
                                                     default:

@@ -49,4 +49,11 @@ public class Product {
 
         return sb.toString();
     }
+
+    public void getProductDetails(){
+        System.out.println("Product Name: " + name);
+        System.out.println("Product Id: " + id);
+        System.out.println("Price: " + price);
+        System.out.println("Quantity: " + quantity);
+    };
 }

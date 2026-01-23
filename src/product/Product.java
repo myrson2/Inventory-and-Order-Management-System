@@ -56,4 +56,8 @@ public class Product {
         System.out.println("Price: " + price);
         System.out.println("Quantity: " + quantity);
     };
+
+    public String getId() {
+        return id;
+    }
 }

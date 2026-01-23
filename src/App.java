@@ -1,7 +1,5 @@
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import user.*;
 import product.*;
 
@@ -78,7 +76,7 @@ public class App {
 
                                                 switch(adminChoice){
                                                     case 1: // Add product
-                                                        System.out.println("===== Add Product =====\n");
+                                                        System.out.println("\n===== Add Product =====");
                                                         
                                                         System.out.print("Name: ");
                                                         String productName = scanner.nextLine();
@@ -91,7 +89,7 @@ public class App {
                                                         int productQuantity = scanner.nextInt();
                                                         scanner.nextLine();
 
-                                                        System.out.println("\n 1. Non-Perishable || 2. Perishable");
+                                                        System.out.println("\n Product Type: \n 11. Non-Perishable || 2. Perishable");
                                                         int productType = scanner.nextInt();
                                                         scanner.nextLine();
 
@@ -102,7 +100,7 @@ public class App {
                                                                 System.out.println("Warannty (Months): ");
                                                                 int months = scanner.nextInt();
                                                                 scanner.nextLine();
-                                                                
+
                                                                 product = new NonPerishableProduct(productName, productPrice, productQuantity, months);   
                                                                 admin.addProduct(product);
                                                             break;
@@ -123,12 +121,23 @@ public class App {
 
                                                     break;
 
-                                                    case 2:
+                                                    case 2: // Update Stocks
+                                                        System.out.println("===== Update Product =====\n");
+
+                                                        System.out.println("Enter Product ID: ");
+                                                        String upd_Id = scanner.nextLine();
+
+                                                        System.out.println("Enter amount: ");
+                                                        int amount = scanner.nextInt();
+
+                                                        admin.updateStocks(upd_Id, amount);
+
+                                                        
                                                     break;
 
-                                                    case 3: // View Product
-                                                        System.out.println("===== Viewing Products =====");
-                                                        admin.viewProducts();
+                                                    case 3: // View All Orders from Customer (Database)
+                                                        System.out.println("===== Viewing All Orders =====");
+                                                        // admin.viewProducts();
                                                     break;
 
                                                     default:

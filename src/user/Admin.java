@@ -24,7 +24,10 @@ public class Admin extends User{
         }
         listOfProducts.add(product);
 
-        System.out.println("Successfully Added.");
+        System.out.println("Successfully Added.\n");
+
+        product.getProductDetails();
+        System.out.println();
     }
 
     public void viewProducts()
@@ -33,4 +36,22 @@ public class Admin extends User{
             product.getProductDetails();
         }
     }
+
+    public void updateStocks(String productId, int amount){
+        int flag = 0;
+        for (Product product : listOfProducts) {
+            if(productId.equalsIgnoreCase(product.getId())){
+                product.increaseStock(amount);
+                flag = 1;
+                break;
+            }
+        }
+
+        if(flag == 1) {
+            System.out.println("Item is Updated.");
+        } else {
+            System.out.println("Not Found.");
+        }
+
+        }
 }

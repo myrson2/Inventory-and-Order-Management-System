@@ -53,6 +53,30 @@ public class App {
                                             System.out.println("Hi, " + customer.getName() + "! Welcome to Customer Dashboard.");
                                             customer.performRoleAction();
 
+                                            int customerChoice = 0;
+
+                                            do{ // customer menu
+                                                customerDashBoardMenu();
+                                                System.out.println("> ");
+                                                customerChoice = scanner.nextInt();
+                                                scanner.nextLine();
+
+                                                switch(customerChoice){
+                                                    case 1: // View available products
+                                                        System.out.println("===== Available Produucts =====");
+                                                    break;
+
+                                                    case 2: // Place orders
+                                                    break;
+
+                                                    case 3: // View order details
+                                                    break;
+
+                                                    default:
+                                                    break;
+                                                }
+                                            }while(customerChoice != 0); // end customer menu
+                                            
                                         break;
                                 
                                     case 2: // Admin Dashboard
@@ -89,7 +113,7 @@ public class App {
                                                         int productQuantity = scanner.nextInt();
                                                         scanner.nextLine();
 
-                                                        System.out.println("\n Product Type: \n 11. Non-Perishable || 2. Perishable");
+                                                        System.out.println("\n Product Type: \n 1. Non-Perishable || 2. Perishable");
                                                         int productType = scanner.nextInt();
                                                         scanner.nextLine();
 
@@ -131,13 +155,12 @@ public class App {
                                                         int amount = scanner.nextInt();
 
                                                         admin.updateStocks(upd_Id, amount);
-
                                                         
                                                     break;
 
                                                     case 3: // View All Orders from Customer (Database)
                                                         System.out.println("===== Viewing All Orders =====");
-                                                        // admin.viewProducts();
+                                                        admin.viewProducts();
                                                     break;
 
                                                     default:
@@ -188,5 +211,11 @@ public class App {
         System.out.println("1. Add Product");
         System.out.println("2. Update Stock");
         System.out.println("3. View All Orders");
+    }
+    
+    static void customerDashBoardMenu(){
+        System.out.println("1. View Available Products");
+        System.out.println("2. Place Orders");
+        System.out.println("3. View Order Details");
     }
 }

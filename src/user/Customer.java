@@ -9,4 +9,6 @@ public class Customer extends User{
     public void performRoleAction() {
         System.out.println("Customer is browsing products and placing orders.");
     }
+
+    
 }

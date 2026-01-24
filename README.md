@@ -1,33 +1,39 @@
-# SmartStock  
+# SmartStock
+
 ## Inventory & Order Management System (Java OOP)
 
 ---
 
 ## 📌 Project Overview
-SmartStock is a **console-based Java application** built for small retail businesses.
-It manages **products, users, and customer orders** using **Object-Oriented Programming (OOP)** concepts.
 
-This project is designed to demonstrate **clean architecture**, **real-world system design**, and **scalable OOP practices**.
+**SmartStock** is a **console-based Java application** designed for small retail businesses.
+It manages **products, inventory, users, and customer orders** using **Object-Oriented Programming (OOP)** principles.
+
+This project focuses on **clean architecture**, **real-world business logic**, and **scalable design**, making it suitable for learning and portfolio use.
 
 ---
 
 ## 🎯 Project Objectives
-- Apply core Java OOP principles in a real-world scenario
-- Design a clean and readable package structure
-- Practice business logic and validation rules
-- Build a portfolio-ready Java system
+
+* Practice core Java OOP concepts in a realistic system
+* Design a clean and maintainable package structure
+* Apply business rules and validations
+* Build a portfolio-ready backend system
 
 ---
 
 ## 📂 Project Structure
 
-~~~
+```
 smartstock/
 │
 ├── product/
 │   ├── Product.java
 │   ├── PerishableProduct.java
 │   ├── NonPerishableProduct.java
+│
+├── inventory/
+│   └── Inventory.java
 │
 ├── user/
 │   ├── User.java
@@ -39,224 +45,306 @@ smartstock/
 │   ├── OrderItem.java
 │
 └── Main.java
-~~~
+```
 
 ---
 
 ## 📦 Package Details & Classes
 
-### 🔹 product Package
-Handles all **product-related information and behavior**.
+---
 
-#### 1️⃣ Product (Base Class)
-**Responsibilities:** Store basic product information and manage stock.  
+## 🔹 product Package
 
-**Fields:**
-- `id` (String) → Unique product ID  
-- `name` (String) → Product name  
-- `price` (double) → Price per unit  
-- `quantity` (int) → Available stock  
+Handles **product data and behavior**.
 
-**Methods:**
-- `increaseStock(int amount)` → Add stock  
-- `decreaseStock(int amount)` → Reduce stock (cannot go below 0)  
-- `getProductDetails()` → Display product information  
+### 1️⃣ Product (Base Class)
 
-**OOP Concepts Used:**
-- **Encapsulation** → Private fields with getters/setters  
-- **Inheritance** → Base class for product types  
-- **Polymorphism** → Overridable methods for custom behavior in subclasses  
+**Purpose:**
+Stores common product information and manages stock.
+
+**Fields**
+
+* `id` (String) — Unique product identifier
+* `name` (String) — Product name
+* `price` (double) — Unit price
+* `quantity` (int) — Available stock
+
+**Methods**
+
+* `increaseStock(int amount)` — Increase stock
+* `decreaseStock(int amount)` — Decrease stock (cannot go below zero)
+* `getProductDetails()` — Returns formatted product info
+
+**OOP Concepts**
+
+* Encapsulation
+* Inheritance
+* Polymorphism
 
 ---
 
-#### 2️⃣ PerishableProduct
-**Responsibilities:** Represent products that expire.  
+### 2️⃣ PerishableProduct
 
-**Additional Fields:**
-- `expirationDate` (LocalDate) → Expiration date  
+**Purpose:**
+Represents products with an expiration date.
 
-**Methods:**
-- Override `getProductDetails()` → Include expiration date  
-- `isExpired()` → Returns true if past expiration  
+**Additional Field**
 
-**OOP Concepts Used:**
-- **Inheritance** → Extends `Product`  
-- **Method Overriding** → Custom product display  
-- **Encapsulation** → Private expiration field  
+* `expirationDate` (LocalDate)
 
----
+**Methods**
 
-#### 3️⃣ NonPerishableProduct
-**Responsibilities:** Represent durable products with optional warranty.  
+* Override `getProductDetails()`
+* `isExpired()` — Checks if product is expired
 
-**Additional Fields:**
-- `warrantyMonths` (int) → Warranty period in months  
+**OOP Concepts**
 
-**Methods:**
-- Override `getProductDetails()` → Include warranty information  
-
-**OOP Concepts Used:**
-- **Inheritance** → Extends `Product`  
-- **Polymorphism** → Overridden display method  
+* Inheritance
+* Method overriding
+* Encapsulation
 
 ---
 
-### 🔹 user Package
-Manages **system users and their roles**.
+### 3️⃣ NonPerishableProduct
 
-#### 1️⃣ User (Base Class)
-**Responsibilities:** Shared behavior for all users.  
+**Purpose:**
+Represents long-lasting products with warranty support.
 
-**Fields:**
-- `id` (String) → Unique user ID  
-- `name` (String) → User name  
-- `email` (String) → Contact email  
+**Additional Field**
 
-**Methods:**
-- `login()` → Authenticate user  
-- `viewProducts()` → View all available products  
-- `performRoleAction()` → Abstract method for role-specific actions  
+* `warrantyMonths` (int)
 
-**OOP Concepts Used:**
-- **Encapsulation** → Private fields with getters/setters  
-- **Abstraction** → Shared functionality with abstract method for roles  
-- **Inheritance** → Base class for `Admin` and `Customer`  
+**Methods**
+
+* Override `getProductDetails()`
+
+**OOP Concepts**
+
+* Inheritance
+* Polymorphism
 
 ---
 
-#### 2️⃣ Admin
-**Responsibilities:** Manage products and view all orders.  
+## 🔹 inventory Package
 
-**Additional Methods:**
-- `addProduct(Product product)`  
-- `updateStock(String productId, int amount)`  
-- `viewAllOrders()`  
+Manages the **centralized system inventory**.
 
-**OOP Concepts Used:**
-- **Inheritance** → Extends `User`  
-- **Polymorphism** → Implements `performRoleAction()`  
-- **Encapsulation** → Admin actions controlled by methods  
+### 1️⃣ Inventory
 
----
+**Purpose:**
+Acts as the **single source of truth** for all products.
 
-#### 3️⃣ Customer
-**Responsibilities:** Place orders and view order history.  
+Admins modify inventory; customers only view it.
 
-**Additional Methods:**
-- `placeOrder(Order order)`  
-- `viewOrderDetails()`  
+**Fields**
 
-**OOP Concepts Used:**
-- **Inheritance** → Extends `User`  
-- **Polymorphism** → Implements `performRoleAction()`  
-- **Encapsulation** → Customer actions restricted to methods  
+* `products` (List<Product>) — All available products
 
----
+**Methods**
 
-### 🔹 order Package
-Handles **ordering and transaction logic**.
+* `addProduct(Product product)`
+* `removeProduct(String productId)`
+* `getProductById(String productId)`
+* `getAllProducts()`
+* `updateStock(String productId, int amount)`
 
-#### 1️⃣ Order
-**Responsibilities:** Represent a single customer order and manage items.  
+**OOP Concepts**
 
-**Fields:**
-- `orderId` (String) → Unique order ID  
-- `customer` (Customer) → Who placed the order  
-- `items` (List<OrderItem>) → Order details  
-- `totalAmount` (double) → Total price of the order  
-- `orderStatus` (OrderStatus enum) → Current order state  
+* Encapsulation
+* Abstraction
+* Composition
+* Single Responsibility
 
-**Methods:**
-- `addItem(Product product, int quantity)` → Adds product to order  
-- `calculateTotal()` → Updates `totalAmount`  
-- `changeOrderStatus(OrderStatus newStatus)` → Update order state  
+**Access Rules**
 
-**OOP Concepts Used:**
-- **Composition** → Order has multiple OrderItems  
-- **Encapsulation** → Private fields with controlled access  
-- **Enums** → OrderStatus: PENDING, PAID, CANCELLED  
+* Admin: full inventory control
+* Customer: read-only access
 
 ---
 
-#### 2️⃣ OrderItem
-**Responsibilities:** Represent a single line item in an order.  
+## 🔹 user Package
 
-**Fields:**
-- `product` (Product) → Product ordered  
-- `quantity` (int) → Number of units  
-- `subTotal` (double) → Price × quantity  
+Manages **system users and permissions**.
 
-**Methods:**
-- `calculateSubTotal()` → Compute subtotal for this item  
-- `getItemDetails()` → Display item info  
+### 1️⃣ User (Abstract Base Class)
 
-**OOP Concepts Used:**
-- **Encapsulation** → Private fields  
-- **Composition** → Belongs to Order  
-- **Single Responsibility** → Handles only one product line  
+**Purpose:**
+Defines shared user behavior.
+
+**Fields**
+
+* `id` (String)
+* `name` (String)
+* `email` (String)
+
+**Methods**
+
+* `login()`
+* `viewProducts()`
+* `performRoleAction()` (abstract)
+
+**OOP Concepts**
+
+* Abstraction
+* Encapsulation
+* Inheritance
+
+---
+
+### 2️⃣ Admin
+
+**Purpose:**
+Manages inventory and monitors orders.
+
+**Methods**
+
+* `addProduct(Product product)`
+* `updateStock(String productId, int amount)`
+* `viewAllOrders()`
+
+**OOP Concepts**
+
+* Inheritance
+* Polymorphism
+
+---
+
+### 3️⃣ Customer
+
+**Purpose:**
+Places orders and views order history.
+
+**Methods**
+
+* `placeOrder(Order order)`
+* `viewOrderDetails()`
+
+**OOP Concepts**
+
+* Inheritance
+* Polymorphism
+
+---
+
+## 🔹 order Package
+
+Handles **order creation and processing**.
+
+### 1️⃣ Order
+
+**Purpose:**
+Represents a customer transaction.
+
+**Fields**
+
+* `orderId` (String)
+* `customer` (Customer)
+* `items` (List<OrderItem>)
+* `totalAmount` (double)
+* `orderStatus` (OrderStatus)
+
+**Methods**
+
+* `addItem(Product product, int quantity)`
+* `calculateTotal()`
+* `changeOrderStatus(OrderStatus newStatus)`
+
+**OOP Concepts**
+
+* Composition
+* Encapsulation
+* Enums
+
+---
+
+### 2️⃣ OrderItem
+
+**Purpose:**
+Represents one product entry inside an order.
+
+**Fields**
+
+* `product` (Product)
+* `quantity` (int)
+* `subTotal` (double)
+
+**Methods**
+
+* `calculateSubTotal()`
+* `getItemDetails()`
+
+**OOP Concepts**
+
+* Single Responsibility
+* Composition
+* Encapsulation
 
 ---
 
 ## ⚙️ Functional Requirements
 
 ### Admin
-- Add new products  
-- Update product stock  
-- View all orders  
+
+* Add products
+* Update stock
+* View all orders
 
 ### Customer
-- View available products  
-- Place orders  
-- View order details  
+
+* View available products
+* Place orders
+* View order details
 
 ### System Rules
-- Product stock must not go below zero  
-- Order quantity must be validated  
-- Order total must be calculated automatically  
+
+* Stock must never be negative
+* Order quantities must be validated
+* Order totals are calculated automatically
 
 ---
 
 ## 🧠 OOP Principles Applied
 
-| Principle        | Implementation                          |
-|-----------------|------------------------------------------|
-| Encapsulation    | Private fields and controlled access     |
-| Inheritance      | User and Product hierarchies             |
-| Polymorphism     | Overridden behavior per subclass         |
-| Abstraction      | Base classes for shared functionality    |
-| Composition      | Order contains OrderItems                |
-| Single Responsibility | OrderItem handles one product line |
+| Principle             | Usage                                       |
+| --------------------- | ------------------------------------------- |
+| Encapsulation         | Private fields with controlled access       |
+| Inheritance           | Product and User hierarchies                |
+| Polymorphism          | Role-specific and product-specific behavior |
+| Abstraction           | Shared base classes                         |
+| Composition           | Orders contain OrderItems                   |
+| Single Responsibility | Each class has one clear purpose            |
 
 ---
 
 ## ⏳ Project Scope
-- Console-based only  
-- In-memory data storage  
-- No database or external libraries  
 
----
-
-## 🗓️ Timeline
-- Designed to be completed in **1 week**  
-- Focused on clean design and OOP mastery  
+* Console-based application
+* In-memory storage only
+* No database or frameworks
 
 ---
 
 ## 🚀 Future Enhancements
-- Payment system integration  
-- File or database storage  
-- Graphical user interface (GUI)  
-- Web-based version  
-- Sales reports and analytics  
+
+* Database integration
+* Payment processing
+* GUI or web interface
+* Sales reporting and analytics
 
 ---
 
 ## 👤 Author
-**Myrson Beros**  
-Java Beginner Developer  
-Focused on mastering Object-Oriented Programming  
+
+**Myrson Beros**
+Java Beginner Developer
+Focused on mastering Object-Oriented Programming
 
 ---
 
 ## 📄 License
-This project is for learning and portfolio purposes only.
+
+For learning and portfolio purposes only.
+
+---
+
+

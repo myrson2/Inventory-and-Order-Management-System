@@ -2,11 +2,12 @@ package user;
 
 import java.util.ArrayList;
 
+import inventory.Inventory;
 import product.NonPerishableProduct;
 import product.Product;
 
 public class Admin extends User{
-    ArrayList<Product> listOfProducts = new ArrayList<>();
+    Inventory inventory = null;
 
     public Admin(String id, String name, String email){
         super(id, name, email);
@@ -18,40 +19,25 @@ public class Admin extends User{
     }
 
     public void addProduct(Product product){
-        if(product == null){
-            System.out.println("Add Some details first.");
-            return; // Prevent adding null products
-        }
-        listOfProducts.add(product);
-
-        System.out.println("Successfully Added.\n");
-
-        product.getProductDetails();
+        inventory.addProduct(product);
         System.out.println();
     }
 
-    public void viewProducts()
-    {
-        for (Product product : listOfProducts) {
-            product.getProductDetails();
+     public void updateStocks(String productId, int amount){
+        inventory.updateStocks(productId, amount);
+        System.out.println();
         }
+
+    public void getProductById(String productId){
+        
     }
 
-    public void updateStocks(String productId, int amount){
-        int flag = 0;
-        for (Product product : listOfProducts) {
-            if(productId.equalsIgnoreCase(product.getId())){
-                product.increaseStock(amount);
-                flag = 1;
-                break;
-            }
-        }
+    // public void viewProducts()
+    // {
+    //     for (Product product : listOfProducts) {
+    //         product.getProductDetails();
+    //     }
+    // }
 
-        if(flag == 1) {
-            System.out.println("Item is Updated.");
-        } else {
-            System.out.println("Not Found.");
-        }
-
-        }
+   
 }

@@ -160,7 +160,7 @@ public class App {
 
                                                     case 3: // View All Orders from Customer (Database)
                                                         System.out.println("===== Viewing All Orders =====");
-                                                        admin.viewProducts();
+                                                        // admin.viewProducts();
                                                     break;
 
                                                     default:

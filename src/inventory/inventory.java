@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import product.Product;
 
 public class Inventory {
-    ArrayList<Product> products = new ArrayList<>();
+    static ArrayList<Product> products = new ArrayList<>();
 
     public boolean addProduct(Product product){ // make this function in boolean
         products.add(product);

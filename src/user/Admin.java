@@ -4,10 +4,12 @@ import inventory.Inventory;
 import product.Product;
 
 public class Admin extends User{
-    Inventory inventory = new Inventory();
 
-    public Admin(String id, String name, String email){
+    private Inventory inventory;
+
+    public Admin(String id, String name, String email, Inventory inventory){
         super(id, name, email);
+        this.inventory = inventory;
     }
 
     @Override

@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import inventory.Inventory;
+
 import java.time.LocalDate;
 import user.*;
 import product.*;
@@ -41,10 +44,14 @@ public class App {
                             int userRoleChoice = scanner.nextInt();
                             scanner.nextLine();
 
+                            Inventory inventory = new Inventory();
+                            Customer customer = new Customer(id, name, email, inventory);
+                            Admin admin = new Admin(id, name, email, inventory);
+
                              do{ // As long as userRoleChoice Invalid 
                                 switch (userRoleChoice) {
                                     case 1: // Customer Dashboard
-                                        User customer = new Customer(id, name, email);
+                                        customer = new Customer(id, name, email, inventory);
                                             if(customer.login()) {
                                                 System.out.println("Successfully Login");
                                             }
@@ -64,6 +71,9 @@ public class App {
                                                 switch(customerChoice){
                                                     case 1: // View available products
                                                         System.out.println("===== Available Products =====");
+
+                                                        admin.getAllProducts();
+
                                                     break;
 
                                                     case 2: // Place orders
@@ -86,7 +96,7 @@ public class App {
                                         break;
                                 
                                     case 2: // Admin Dashboard
-                                        Admin admin = new Admin(id, name, email); // Changed User to Admin
+                                        admin = new Admin(id, name, email, inventory); // Changed User to Admin
                                             if(admin.login()) {
                                                 System.out.println("Successfully Login");
                                             }

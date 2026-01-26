@@ -16,27 +16,39 @@ public class Inventory {
         return true;
     }
 
-    public boolean updateStocks(String productId, int amount){
-        if(products.isEmpty()){
-            System.out.println("Add Products first");
-            return false;
-        }
-
-        int flag = 0;
-        for (Product product : products) {
-            if(productId.equalsIgnoreCase(product.getId())){
-                product.increaseStock(amount);
-                flag = 1;
-                break;
-            }
-        }
-
-        if(flag == 0) {
-            return false;
-        } 
-
-        return true;
+    public boolean updateStocks(String productId, int amount) {
+    if (products.isEmpty()) {
+        System.out.println("Add products first.");
+        return false;
     }
+
+    for (Product product : products) {
+        if (productId.equalsIgnoreCase(product.getId())) {
+
+            if (amount > 0) {
+                product.increaseStock(amount);
+                return true;
+
+            } else if (amount < 0) {
+                int decreaseAmount = -amount;
+
+                if (product.getQuantity() < decreaseAmount) {
+                    System.out.println("Not enough stock.");
+                    return false;
+                }
+
+                product.decreaseStock(decreaseAmount);
+                return true;
+            }
+
+            System.out.println("Amount cannot be zero.");
+            return false;
+        }
+    }
+
+    System.out.println("Product not found.");
+    return false;
+}
 
     public String getProductById(String productId){
         int flag = 0;

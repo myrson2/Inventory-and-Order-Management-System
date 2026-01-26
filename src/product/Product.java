@@ -28,12 +28,13 @@ public class Product {
     }
     
     public void increaseStock(int amount){
-        if (amount > 0) {
             quantity += amount;
             System.out.println("Stock increased by " + amount + ". New quantity: " + quantity);
-        } else {
-            System.out.println("Invalid amount: must be positive.");
-        }
+    }
+
+    public void decreaseStock(int amount){
+            quantity -= amount;
+            System.out.println("Stock decreased by " + amount + ". New quantity: " + quantity);
     }
 
     static String productIdGenerator(Random random){
@@ -63,5 +64,9 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

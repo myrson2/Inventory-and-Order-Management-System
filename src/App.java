@@ -154,6 +154,9 @@ public class App {
                                                     case 2: // Update Stocks
                                                         System.out.println("===== Update Product =====\n");
 
+                                                        admin.getAllProducts();
+                                                        System.out.println();
+
                                                         System.out.println("Enter Product ID: ");
                                                         String upd_Id = scanner.nextLine();
 

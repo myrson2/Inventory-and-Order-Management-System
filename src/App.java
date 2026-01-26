@@ -63,13 +63,19 @@ public class App {
 
                                                 switch(customerChoice){
                                                     case 1: // View available products
-                                                        System.out.println("===== Available Produucts =====");
+                                                        System.out.println("===== Available Products =====");
                                                     break;
 
                                                     case 2: // Place orders
                                                     break;
 
                                                     case 3: // View order details
+                                                    break;
+
+                                                    case 0:
+                                                        System.out.println("Logging out.... ");
+                                                        System.out.println("(Enter to log out) ");
+                                                        scanner.nextLine();
                                                     break;
 
                                                     default:
@@ -113,7 +119,7 @@ public class App {
                                                         int productQuantity = scanner.nextInt();
                                                         scanner.nextLine();
 
-                                                        System.out.println("\n Product Type: \n 1. Non-Perishable || 2. Perishable");
+                                                        System.out.print("\n Product Type (1-Non-Perishable  2-Perishable): ");
                                                         int productType = scanner.nextInt();
                                                         scanner.nextLine();
 
@@ -153,15 +159,29 @@ public class App {
 
                                                         System.out.println("Enter amount: ");
                                                         int amount = scanner.nextInt();
+                                                        scanner.nextLine();
 
                                                         admin.updateStocks(upd_Id, amount);
                                                         
                                                     break;
 
-                                                    case 3: // View All Orders from Customer (Database)
-                                                        System.out.println("===== Viewing All Orders =====");
-                                                        // admin.viewProducts();
+                                                    case 3: //remove product
+                                                        System.out.println("===== Remove Product ======");
+                                                        admin.getAllProducts();
+                                                        System.out.println();
+
+                                                        System.out.print("Product ID: ");
+                                                        String removeByproductId = scanner.nextLine();
+
+                                                        admin.removeProduct(removeByproductId);
+                                                        
                                                     break;
+
+                                                    case 0:
+                                                        System.out.println("Logging out.... ");
+                                                        System.out.println("(Enter to log out) ");
+                                                        scanner.nextLine();
+                                                    break; 
 
                                                     default:
                                                     break;
@@ -209,13 +229,15 @@ public class App {
 
     static void adminDashboardMenu(){
         System.out.println("1. Add Product");
-        System.out.println("2. Update Stock");
-        System.out.println("3. View All Orders");
+        System.out.println("2. Update Stock"); 
+        System.out.println("3. Remove Products");
+        System.out.println("0. Logout");
     }
     
     static void customerDashBoardMenu(){
         System.out.println("1. View Available Products");
         System.out.println("2. Place Orders");
-        System.out.println("3. View Order Details");
+        System.out.println("3. Get Element By Id");
+        System.out.println("0. Logout");
     }
 }

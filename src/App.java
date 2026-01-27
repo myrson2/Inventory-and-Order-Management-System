@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 import inventory.Inventory;
+import order.Order;
+import order.OrderStatus;
 
 import java.time.LocalDate;
 import user.*;
@@ -45,6 +47,7 @@ public class App {
                             scanner.nextLine();
 
                             Inventory inventory = new Inventory();
+                            Order order = new Order(id, null);
                             Customer customer = new Customer(id, name, email, inventory);
                             Admin admin = new Admin(id, name, email, inventory);
 
@@ -64,22 +67,65 @@ public class App {
 
                                             do{ // customer menu
                                                 customerDashBoardMenu();
-                                                System.out.println("> ");
+                                                System.out.print("> ");
                                                 customerChoice = scanner.nextInt();
                                                 scanner.nextLine();
 
                                                 switch(customerChoice){
                                                     case 1: // View available products
-                                                        System.out.println("===== Available Products =====");
-
-                                                        admin.getAllProducts();
+                                                        System.out.println("===== Available Products =====\n");
+                                                        customer.getAllProducts();
+                                                        System.out.println();
 
                                                     break;
 
                                                     case 2: // Place orders
+                                                        boolean ordering = true;
+
+                                                        while(ordering) {
+                                                            System.out.println("===== Place Order =====\n");
+
+                                                            admin.getAllProducts();
+                                                            System.out.println();
+
+                                                            System.out.print("Product ID: ");
+                                                            String place_productID = scanner.nextLine();
+
+                                                            Product product = inventory.getProductById(place_productID);
+
+                                                            if (product == null) {
+                                                                System.out.println("Error: Product not found. Please enter a valid Product ID.");
+                                                                continue; // skip this iteration
+                                                            }
+
+                                                            System.out.print("Quantity: ");
+                                                            int place_quantity = scanner.nextInt();
+                                                            scanner.nextLine();
+
+                                                            if (product.getQuantity() < place_quantity) {
+                                                                System.out.println("Error: Insufficient stock. Available quantity: " + product.getQuantity());
+                                                                continue; // ask again
+                                                            }
+
+                                                            // Update inventory
+                                                            inventory.updateStocks(place_productID, -place_quantity);
+
+                                                            // Add to order
+                                                            order.addItem(product, place_quantity);
+
+                                                            // Ask if customer wants to order more
+                                                            System.out.print("Do you want to add another product? (yes/no): ");
+                                                            String more = scanner.nextLine().trim().toLowerCase();
+
+                                                            if (!more.equals("yes")) {
+                                                                ordering = false; // exit loop
+                                                            }
+                                                        }
+
                                                     break;
 
                                                     case 3: // View order details
+                                                            
                                                     break;
 
                                                     case 0:
@@ -250,7 +296,7 @@ public class App {
     static void customerDashBoardMenu(){
         System.out.println("1. View Available Products");
         System.out.println("2. Place Orders");
-        System.out.println("3. Get Element By Id");
+        System.out.println("3. View Order Details");
         System.out.println("0. Logout");
     }
 }

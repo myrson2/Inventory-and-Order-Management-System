@@ -50,16 +50,15 @@ public class Inventory {
     return false;
 }
 
-    public String getProductById(String productId){
+    public Product getProductById(String productId){
         int flag = 0;
-        String returnProductId = "";
         
         for (Product product : products) {
             if(productId.equalsIgnoreCase(product.getId())){
-                returnProductId = product.getId();
                 flag = 1;
-                break;
+                return product;
             }
+            break;
         }
 
         if(flag == 1) {
@@ -68,7 +67,7 @@ public class Inventory {
             System.out.println("Not Found.");
         }
 
-        return returnProductId;
+        return null;
     }
 
     public void getAllProducts(){
@@ -78,7 +77,7 @@ public class Inventory {
     }
 
     public boolean removeProduct(String productId) {
-    String targetId = getProductById(productId);
+    String targetId = getProductById(productId).getId();
     
     return products.removeIf(product -> 
         product.getId().equalsIgnoreCase(targetId)

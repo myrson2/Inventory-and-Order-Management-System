@@ -69,4 +69,8 @@ public class Product {
     public int getQuantity() {
         return quantity;
     }
+
+    public double getPrice() {
+        return price;
+    }
 }

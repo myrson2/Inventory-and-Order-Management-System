@@ -21,7 +21,9 @@ public class OrderItem {
         return subTotal;
     }
 
-    public void getItemDetails(){
-        System.out.printf("Item: %s || Quantity: %d || Subtotal: %lf", product.getName(), quantity, subTotal);
-    }
+    public void getItemDetails() {
+    // Use %f instead of %lf and add \n at the end
+    System.out.printf("Item: %s || Quantity: %d || Subtotal: %.2f\n", 
+                      product.getName(), quantity, subTotal);
+}
 }

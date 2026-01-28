@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 import inventory.Inventory;
 import order.Order;
-import order.OrderStatus;
-
 import java.time.LocalDate;
 import user.*;
 import product.*;
@@ -122,10 +120,12 @@ public class App {
                                                             }
                                                         }
 
+                                                        customer.placeOrder(order);
                                                     break;
 
                                                     case 3: // View order details
-                                                            
+                                                            System.out.println("====== View Order Details =====");
+                                                            customer.viewOrderDetails();
                                                     break;
 
                                                     case 0:
